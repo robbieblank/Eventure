@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Eventure</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <style>
+        #attraction-panel {
+            display: none;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+</head>
+
+<body style="background-color: black;">
+    <div class="topnav">
+        <div class="login-container">
+            <button type="button" onclick="window.location = 'user.html'" id="userBttn">Your events</button>
+        </div>
+    </div>
+
+    <div class="s01" id="searchBg" style="background-image: url('Search_001.png');">
+        <form>
+            <fieldset>
+                <center>
+                    <legend>Eventure - Find Events Near You</legend>
+                </center>
+            </fieldset>
+            <div class="inner-form" style="position: relative">
+                <div id="myDropdown" class="input-field first-wrap dropdown-content">
+                    <input id="searchInputBox" type="text" placeholder="Where are you at?" onkeyup="filterFunction()" />
+                    <div id="dropdownContent" class="hidden">
+                    </div>
+                </div>
+                <div class="input-field third-wrap">
+                    <button id="searchButton" class="btn-search" type="button">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- SEARCH RESULT BOX -->
+    <!--checkbox filter-->
+    <center>
+        <div id="checkbox-filter" class="hidden">
+            <input type="checkbox" id="music" name="Concerts" value="Concerts">
+            <label for="concerts">Concerts | </label>
+            <input type="checkbox" id="sports" name="Sports" value="Sports">
+            <label for="sports">Sports | </label>
+            <input type="checkbox" id="arts" name="Arts & Theater" value="Arts & Theater">
+            <label for="artTheater">Arts & Theater | </label>
+            <input type="checkbox" id="miscellaneous" name="Other" value="other">
+            <label for="other">Misc.</label>
+        </div>
+    </center>
+    <!--checkbox filter ends-->
+
+    <div class="container hidden" id="contain">
+        <div class="row" id="row1">
+            <div id="column1" class="col-xs-6">
+                <div id='events-panel' class="panel panel-primary">
+                    <div class="panel-heading" id="panel-heading">
+                        <h3 class="panel-title" id="panel-title">Events</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="events" class="list-group">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+<script src="cities.js"></script>
+
+</html>

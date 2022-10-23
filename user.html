@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Eventure</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+
+  <style>
+    #attraction-panel {
+      display: none;
+    }
+  </style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!--HEAD OF SEARCH RESULTS-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+    integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.9.1/firebase-app.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
+
+  <!-- HEAD OF SEARCH RESULTS ENDED-->
+</head>
+
+<body style="background-color:black;">
+  <div class="topnav">
+    <div class="login-container">
+      <button type="button" id="mainPageBttn" onclick="window.location = 'index.html'">Home</button>
+    </div>
+  </div>
+
+  <div class="container" id="contain" style="margin-top: 20px; margin-bottom: 20px; float: left;">
+    <div class="row" id="row1">
+      <div id="column1" class="col-xs-6">
+        <div id='events-panel' class="panel panel-primary">
+          <div class="panel-heading" id="panel-heading">
+            <h3 class="panel-title" id="panel-title" style="font-size: 20px;">Saved Events</h3>
+          </div>
+          <div class="panel-body">
+            <div id="savedEventsList" class="list-group">
+            </div>
+            <center><button id="clearAllEvents">Clear all events</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script>
+  const updateSavedEvents = () => {
+    const panel = document.querySelector("#savedEventsList");
+    events = window.localStorage.getItem("data");
+    if (events) {
+      eventsList = JSON.parse(events).arr;
+      panel.innerHTML = "";
+      for (let i = 0; i < eventsList.length; i++) {
+        let event = eventsList[i];
+        let eventCategory = event.category;
+        let category = "";
+        if (eventCategory === "Arts & Theatre") {
+          category = "arts"
+        } else {
+          category = eventCategory.toLowerCase();
+        }
+
+        let eventLink = event.link;
+        let eventName = event.name;
+        let eventDate = event.date;
+        let eventLocation = event.location;
+
+        panel.innerHTML += `<div a class="list-group-item ${category}">
+                <h4 id = "list-group-item-heading" class="list-group-item-heading"><a href="${eventLink}" target="_blank" style="color:#328b80; font-size: 20px;">${eventName}</a></h4>
+                <p class="list-group-item-text"> ${eventDate}</p>
+                <p class="list-group-item-text"> ${eventCategory}</p>
+                <p class="venue">${eventLocation}</p>
+                </br>
+              </a><\div>`;
+      }
+    } else {
+
+    }
+  };
+
+  updateSavedEvents();
+</script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+  integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script src="script.js"></script>
+<script>
+  const removeBttn = document.querySelector("#clearAllEvents");
+  removeBttn.addEventListener("click", (e) => {
+    if (window.confirm("Are you sure you want to clear your saved events?")) {
+      console.log("cleared");
+      window.localStorage.clear();
+      document.querySelector("#savedEventsList").innerHTML = "";
+    }
+  });
+</script>
+
+</html>
